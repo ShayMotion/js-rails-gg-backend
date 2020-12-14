@@ -1,6 +1,33 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :auctions
-  resources :guitars
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
+  root :to => 'sessions#index'
+
+
+  get "/login" => "sessions#new"
+  post "/login" => "sessions#create"
+  delete "/logout" => "sessions#destroy"
+
+  get "/signup" => "users#new"
+  post "/signup" => "users#create"
+ 
+  get "/auctions/:id" => "auctions#show"
+  get "/auction/new" => "auctions#new"
+  post "/auctions" => "auctions#create"
+  delete "/auctions/:id" => "auctions#destroy"
+
+  get "/guitars" => "guitars#index"
+  # get "/guitars/:id' "guitars#show"
+  get "/guitars/new" => "guitars#new"
+  post "/guitars" => "guitars#create"
+  delete "/guitars/:id" => "guitars#destroy"
+
+  get "/users/new" => "users#new"
+  get "/users/:id" => "users#show"
+  post "/users" => "users#create"
+  delete "/users/:id" => "users#destroy"
+      resources :users
+      resources :auctions do 
+      resources :guitars 
+      end
+    
+
+    end

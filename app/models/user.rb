@@ -1,2 +1,7 @@
 class User < ApplicationRecord
-end
+    has_secure_password
+    has_many :guitars 
+    has_many :auctions
+    belongs_to :locations
+    validates :username, uniqueness: true
+    end
