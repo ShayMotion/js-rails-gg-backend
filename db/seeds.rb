@@ -8,7 +8,6 @@
 
 
 
-User.create(name: "Shayan", username: "shaymotion", password: "password")
 
 Auction.create(title: "Shayan's Auction", start_date: "10102020", end_date: "01022020")
 
