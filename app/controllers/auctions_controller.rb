@@ -1,14 +1,20 @@
 class AuctionsController < ApplicationController
 
   def index
+    auctions = Auction.all
     render json: AuctionSerializer.new(auctions)
+  end
+
+  def get_all
+    return Auction.all
   end
 
   def create
     @auction = Auction.new(auction_params)
     
-  if @auction.save
-    render json: AuctionSerializer.new(auction)
+    if @auction.save
+      render json: AuctionSerializer.new(@auction)
+    end
   end
 
   def destroy  
@@ -19,6 +25,6 @@ class AuctionsController < ApplicationController
   private
 
   def auction_params
-    params.require(:auction).permit(:title)
+    params.require(:auction).permit(:title, :start_date, :end_date)
   end
 end

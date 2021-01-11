@@ -6,10 +6,14 @@ class GuitarsController < ApplicationController
   end
 
   def create
+
     @guitar = Guitar.new(guitar_params)
 
-    if guitar.save
-    render json: @guitar, status: 200
+    if @guitar.save
+      render json: GuitarSerializer.new(@guitar), status: 200
+    else
+      render json: @guitar.errors, status: 422
+    end
   end
 
   def destroy
@@ -24,7 +28,7 @@ class GuitarsController < ApplicationController
   end
 
   def guitar_params
-    params.require(:guitar).permit(:brand)
+    params.require(:guitar).permit(:brand, :model, :year, :price, :auction_id)
   end
 end
  
